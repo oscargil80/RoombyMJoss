@@ -40,8 +40,6 @@ class MainViewModel : ViewModel() {
 
                 db.personalDao().getAll()
             }
-
-
         }
     }
 }

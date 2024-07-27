@@ -13,6 +13,9 @@ interface PersonalDao {
    @Query("select * from personal")
     suspend fun getAll():List<Personal>
 
+    @Query("select * from personal where idEmpleado = :id ")
+    suspend fun getById(id:Long):Personal
+
     @Insert
     suspend fun insert(personas: List<Personal>):List<Long>
 

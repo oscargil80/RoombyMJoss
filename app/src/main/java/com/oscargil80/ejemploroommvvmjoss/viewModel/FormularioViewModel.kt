@@ -53,6 +53,19 @@ class FormularioViewModel : ViewModel() {
             }
         }
     }
+
+    fun cargarDatos() {
+        viewModelScope.launch {
+            var persona = withContext(Dispatchers.IO){
+                db.personalDao().getById(id.value!!)
+            }
+            nombre.value = persona.nombre
+            apellidos.value = persona.apellido
+            telefono.value = persona.telefono
+            email.value = persona.email
+            edad.value = persona.edad
+        }
+    }
 }
 
 
