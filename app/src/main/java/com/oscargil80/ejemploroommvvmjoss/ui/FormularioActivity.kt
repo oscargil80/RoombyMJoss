@@ -13,15 +13,18 @@ import com.oscargil80.ejemploroommvvmjoss.R
 import com.oscargil80.ejemploroommvvmjoss.config.Constantes
 import com.oscargil80.ejemploroommvvmjoss.databinding.ActivityFormularioBinding
 import com.oscargil80.ejemploroommvvmjoss.databinding.ActivityMainBinding
+import com.oscargil80.ejemploroommvvmjoss.dialogos.BorrarDialogo
 import com.oscargil80.ejemploroommvvmjoss.viewModel.FormularioViewModel
 
-class FormularioActivity : AppCompatActivity() {
+class FormularioActivity : AppCompatActivity(), BorrarDialogo.BorrarListener {
     lateinit var binding: ActivityFormularioBinding
     lateinit var viewModel: FormularioViewModel
+    lateinit var dialogoBorrar: BorrarDialogo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFormularioBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        dialogoBorrar = BorrarDialogo(this)
 
         viewModel = ViewModelProvider(this).get()
         viewModel.operacion = intent.getStringExtra(Constantes.OPERACION_KEY)!!
@@ -34,8 +37,10 @@ class FormularioActivity : AppCompatActivity() {
                 mostrarMensaje("Operacion Exitosa")
                 irAlInicio()
             } else {
-                mostrarMensaje("Operacion Exitosa")
+                mostrarMensaje("Error al Guardar Verifique Datos")
             }
+
+
         })
 
         if(viewModel.operacion.equals(Constantes.OPERACION_EDITAR)){
@@ -46,9 +51,16 @@ class FormularioActivity : AppCompatActivity() {
         }else{
             binding.linearEditar.visibility = View.GONE
             binding.btnGuardar.visibility = View.VISIBLE
-
         }
 
+        binding.btnBorrar.setOnClickListener {
+            mostrarDialogo()
+        }
+
+    }
+
+    private fun mostrarDialogo() {
+        dialogoBorrar.show(supportFragmentManager, "Dialogo Borrar")
     }
 
     private fun irAlInicio() {
@@ -59,5 +71,9 @@ class FormularioActivity : AppCompatActivity() {
 
     private fun mostrarMensaje(s: String) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+    }
+
+    override fun borrarPersona() {
+        viewModel.eliminarPersonal()
     }
 }
