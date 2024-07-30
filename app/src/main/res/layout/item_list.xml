@@ -46,10 +46,10 @@
                 android:id="@+id/tvTelefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                style="@style/itemStyle"
                 android:layout_marginTop="4dp"
                 android:drawableStart="@drawable/ic_phone" />
-                />
+
 
             <TextView
                 android:id="@+id/tvEmail"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:drawableStart="@drawable/ic_email"
-                android:textColor="@color/black" />
+                style="@style/itemStyle"  />
 
             <TextView
                 android:id="@+id/tvEdad"
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:drawableStart="@drawable/ic_person"
-                android:textColor="@color/black" />
+                style="@style/itemStyle" />
             </LinearLayout>
 
         </LinearLayout>

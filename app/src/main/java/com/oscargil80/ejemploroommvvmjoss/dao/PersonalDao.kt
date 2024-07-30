@@ -16,6 +16,9 @@ interface PersonalDao {
     @Query("select * from personal where idEmpleado = :id ")
     suspend fun getById(id:Long):Personal
 
+    @Query("select * from personal where nombre like '%'  || :name ||  '%'  or apellido  like '%'  || :name ||  '%'  ")
+    suspend fun getByName(name:String):List<Personal>
+
     @Insert
     suspend fun insert(personas: List<Personal>):List<Long>
 
